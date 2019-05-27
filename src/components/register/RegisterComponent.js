@@ -6,25 +6,30 @@ import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
-function Login() {
+function Register() {
 
-    const [RegisterPage, setRegisterPage] = useState(false);
+    const [LoginPage, setLoginPage] = useState(false);
+
+    const register = (event) => {
+        event.preventDefault();
+        console.log('register');
+    };
 
     const login = (event) => {
         event.preventDefault();
         console.log('login');
-    };
-    
-    const register = (event) => {
-        event.preventDefault();
-        console.log('register');
-        setRegisterPage(true);
+        setLoginPage(true);
     };
 
     return (
         <Container>
-            {RegisterPage? <Redirect to='/register' />: null}
+            {LoginPage? <Redirect to='/login' />: null}
             <Form>
+                <Form.Group controlId="formBasicName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="name" placeholder="Enter name" />
+                </Form.Group>
+
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" />
@@ -38,16 +43,12 @@ function Login() {
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicChecbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-
                 <ButtonToolbar>
-                    <Button variant="primary" onClick={login}>
-                        Login
-                    </Button>
-                    <Button variant="outline-primary" onClick={register}>
+                    <Button variant="primary" onClick={register}>
                         Register
+                    </Button>
+                    <Button variant="outline-primary" onClick={login}>
+                        Login
                     </Button>
                 </ButtonToolbar>
             </Form>
@@ -55,4 +56,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
