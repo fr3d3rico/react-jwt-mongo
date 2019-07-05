@@ -6,19 +6,40 @@ import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
+import axios from 'axios';
+
 function Register() {
 
     const [LoginPage, setLoginPage] = useState(false);
+    const [userData, setUserData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
 
     const register = (event) => {
         event.preventDefault();
-        console.log('register');
+        if( !userData.name || !userData.email || !userData.password ) {
+            console.log('Register: IMPLEMENTAR');
+        }
+        else {
+            axios.post('/register', userData)
+            .then(response => {
+                console.log(response.data);
+            });
+        }
     };
 
     const login = (event) => {
         event.preventDefault();
-        console.log('login');
         setLoginPage(true);
+    };
+
+    const handleChange = (event) => {
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value
+        });
     };
 
     return (
@@ -27,12 +48,12 @@ function Register() {
             <Form>
                 <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="name" placeholder="Enter name" />
+                    <Form.Control type="name" name="name" placeholder="Enter name" onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="email" name="email" placeholder="Enter email" onChange={handleChange} />
                     <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text>
@@ -40,7 +61,7 @@ function Register() {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" name="password" placeholder="Password" onChange={handleChange} />
                 </Form.Group>
 
                 <ButtonToolbar>
