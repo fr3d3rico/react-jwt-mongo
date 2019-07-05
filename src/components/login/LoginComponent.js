@@ -17,12 +17,10 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // userData: {
-                name: '',
-                email: '',
-                password: '',
-                auth: false
-            ,// },
+            name: '',
+            email: '',
+            password: '',
+            auth: false,
             msg: {
                 type: 'primary',
                 msg: ''
@@ -54,21 +52,17 @@ class Login extends React.Component {
             axios.post('/login', postData)
             .then(response => {
                 this.setState({
-                    // userData: {
-                        name: response.data.user.name,
-                        email: response.data.user.email,
-                        password: this.state.password,
-                        access_token: response.data.access_token,
-                        expires_in: response.data.expires_in,
-                        auth: true
-                    ,// },
+                    name: response.data.user.name,
+                    email: response.data.user.email,
+                    access_token: response.data.access_token,
+                    expires_in: response.data.expires_in,
+                    auth: true,
                     msg: {
                         type: 'success',
                         msg: 'Hey '+ response.data.user.name +', you logged success!'
                     }
                 }, () => {
                     this.cookies.set('access_token', response.data.access_token);
-    
                     // this.props.history.replace( '/home' );
                 });
                 
@@ -91,7 +85,6 @@ class Login extends React.Component {
         this.setState({
             RegisterPage: true
         });
-        //console.log(this.cookies.get('access_token'));
     }
 
     handleChange = (event) => {

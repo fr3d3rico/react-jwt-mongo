@@ -10,15 +10,12 @@ class Tool extends React.Component {
     }
 
     render() {
-        
-        return (
-        <Container>
-            <span>Name: {this.props.name}</span>
-            <span>Title: {this.props.title}</span>
-            <span>Link: {this.props.link}</span>
-            <span>Tags: {this.props.tags}</span>
-        </Container>
-        );
+        return (<div>
+            Name:{this.props.name?this.props.name:''}
+            Title:{this.props.title?this.props.title:''}
+            Link:{this.props.link?this.props.link:''}
+            Tags:{this.props.tags?this.props.tags:''}
+            </div>);
     }
 }
 

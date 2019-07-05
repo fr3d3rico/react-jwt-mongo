@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://192.168.25.8:3030';
+axios.defaults.baseURL = 'http://10.8.13.117:3030';
 
 axios.interceptors.request.use(req => {
     console.log('axios.interceptors(REQ) ' + req);
