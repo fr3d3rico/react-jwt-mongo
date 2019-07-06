@@ -5,12 +5,10 @@ class Contact extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // userData: {
-                name: '',
-                email: '',
-                password: '',
-                auth: props.auth !== null? props.auth:false
-            ,// },
+            name: '',
+            email: '',
+            password: '',
+            auth: props.auth !== null? props.auth:false,
             msg: {
                 type: 'primary',
                 msg: ''
@@ -22,7 +20,9 @@ class Contact extends React.Component {
     render() {
         return (
             <Container>
-                Contact Component
+                Hi, Fred! (https://github.com/fr3d3rico)
+                <br />
+                Linkedin: https://www.linkedin.com/in/fasoares
             </Container>
         );
     }
