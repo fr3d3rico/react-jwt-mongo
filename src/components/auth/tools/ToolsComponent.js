@@ -30,7 +30,8 @@ class Tools extends React.Component {
                 msg: ''
             },
             toolList: null,
-            show: false
+            show: false,
+            itemTarget: null
         };
 
         this.cookies = new Cookies();
@@ -49,14 +50,14 @@ class Tools extends React.Component {
                 toolList: response.data.map((item, index) => {
 
                     return (
-                        <tr key={index}>
+                        <tr>
                             <Tool
-                                key={item._id}
+                                key={index}
                                 name={item.name}
                                 title={item.title}
                                 description={item.description}
                                 tags={item.tags} />
-                            <Button variant="secondary" onClick={this.handleShow}>
+                            <Button variant="secondary" onClick={(event) => this.handleShow(event, item._id)}>
                                 Remove?
                             </Button>
                         </tr>
@@ -84,17 +85,20 @@ class Tools extends React.Component {
     }
 
     handleClose = () => {
-        this.setState({ show: false });
+        this.setState({ show: false, itemTarget: null });
     }
 
-    handleShow = () => {
-        this.setState({ show: true });
+    handleShow = (event, id) => {
+        this.setState({ show: true, itemTarget: id });
+        console.log(id);
     }
 
-    handleRemove = (event) => {
+    handleRemove = (event, id) => {
         event.preventDefault();
 
-        axios.delete('/tools', {
+        console.log(id);
+
+        axios.delete(`/tools/${id}`, {
             headers: {
                 "x-access-token": this.cookies.get('access_token')
             }
@@ -102,23 +106,7 @@ class Tools extends React.Component {
         .then(response => {
             console.log(response.data);
 
-            this.setState({
-                toolList: response.data.map((item, index) => {
-                    return (
-                        <tr key={index}>
-                            <Tool
-                                key={item._id}
-                                name={item.name}
-                                title={item.title}
-                                description={item.description}
-                                tags={item.tags} />
-                            <Button variant="secondary" onClick={this.handleShow}>
-                                Remove?
-                            </Button>
-                        </tr>
-                    );
-                })
-            });
+            this.search();
         })
         .catch(err => {
             this.setState({
@@ -127,6 +115,9 @@ class Tools extends React.Component {
                     msg: 'Error while trying remove Tool item.' + err
                 }
             });
+        })
+        .then(() => {
+            this.handleClose();
         });
     }
 
@@ -162,14 +153,14 @@ class Tools extends React.Component {
                 </Table>
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Are you Sure about remove this item?</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body>Item id: {this.state.itemTarget}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
-                        <Button variant="danger" onClick={this.handleRemove}>
+                        <Button variant="danger" onClick={(event) => this.handleRemove(event, this.state.itemTarget)}>
                             Remove Item
                         </Button>
                     </Modal.Footer>
