@@ -9,6 +9,7 @@ import Contact from '../contact/Contact';
 import Tools from '../tools/ToolsComponent';
 
 import Cookies from 'universal-cookie';
+import Logout from '../../login/LogoutComponent';
 
 class Home extends React.Component {
 
@@ -28,6 +29,14 @@ class Home extends React.Component {
         this.cookies = new Cookies();
     }
 
+    componentWillMount() {
+        if( this.cookies.get('access_token') ) {
+            this.setState({
+                auth: true
+            });
+        }
+    }
+
     render() {
 
         if( !this.state.auth ) {
@@ -44,7 +53,7 @@ class Home extends React.Component {
                     <Contact />
                 </Tab>
                 <Tab eventKey="logout" title="Logout">
-                    
+                    <Logout />
                 </Tab>
             </Tabs>
         </Container>
