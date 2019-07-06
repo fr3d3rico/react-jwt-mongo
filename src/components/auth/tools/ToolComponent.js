@@ -11,9 +11,9 @@ class Tool extends React.Component {
 
     render() {
         return (<div>
-            Name:{this.props.name?this.props.name:''}
             Title:{this.props.title?this.props.title:''}
             Link:{this.props.link?this.props.link:''}
+            Description:{this.props.name?this.props.description:''}
             Tags:{this.props.tags?this.props.tags:''}
             </div>);
     }
