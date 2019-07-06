@@ -44,6 +44,10 @@ class Tools extends React.Component {
         this.cookies = new Cookies();
     }
 
+    componentWillMount() {
+        this.search('', () => {});
+    }
+
     handleChange = (event) => {
         
         this.setState({
@@ -102,10 +106,6 @@ class Tools extends React.Component {
         .then(() => {
             this.handleClose();
         });
-    }
-
-    componentWillMount() {
-        this.search('', () => {});
     }
 
     handleSearch = (event) => {
