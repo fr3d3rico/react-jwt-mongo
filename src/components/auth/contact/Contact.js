@@ -1,5 +1,7 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
+
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 class Contact extends React.Component {
     constructor(props) {
@@ -17,13 +19,22 @@ class Contact extends React.Component {
 
     }
 
+    handleClick = () => {
+        window.open('https://www.linkedin.com/in/fasoares', '_blank');
+    }
+
     render() {
         return (
-            <Container>
-                Hi, Fred! (https://github.com/fr3d3rico)
-                <br />
-                Linkedin: https://www.linkedin.com/in/fasoares
-            </Container>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src="https://avatars0.githubusercontent.com/u/1296366?s=460&v=4" />
+                    <Card.Body>
+                        <Card.Title>Hi, Fred! (https://github.com/fr3d3rico)</Card.Title>
+                        <Card.Text>
+                        LinkedIn: https://www.linkedin.com/in/fasoares
+                        </Card.Text>
+                        <Button variant="primary" onClick={this.handleClick}>Go to LinkedIn</Button>
+                    </Card.Body>
+                </Card>
         );
     }
 }
