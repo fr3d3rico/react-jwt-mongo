@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
-
 class Tool extends React.Component {
 
     constructor(props) {

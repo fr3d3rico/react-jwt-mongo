@@ -111,10 +111,24 @@ class Tools extends React.Component {
     handleSearch = (event) => {
         event.preventDefault();
         if( this.state.textSearch ) {
-            this.search(this.state.textSearch, () => {});
+            this.search(this.state.textSearch, () => {
+                this.setState({
+                    msg: {
+                        type: '',
+                        msg: ''
+                    }
+                });
+            });
         }
         else {
-            this.search('', () => {});
+            this.search('', () => {
+                this.setState({
+                    msg: {
+                        type: '',
+                        msg: ''
+                    }
+                });
+            });
         }
     }
 
